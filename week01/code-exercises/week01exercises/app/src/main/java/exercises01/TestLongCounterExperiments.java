@@ -16,22 +16,26 @@ public class TestLongCounterExperiments {
 
 		Thread t1 = new Thread(() -> {
 			for (int i = 0; i < counts; i++) {
-				lock.lock();
-				try {
-					lc.increment();
-				} finally {
-					lock.unlock();
-				}
+				lc.increment();
+
+				// lock.lock();
+				// try {
+				// lc.increment();
+				// } finally {
+				// lock.unlock();
+				// }
 			}
 		});
 		Thread t2 = new Thread(() -> {
 			for (int i = 0; i < counts; i++) {
-				lock.lock();
-				try {
-					lc.increment();
-				} finally {
-					lock.unlock();
-				}
+				lc.increment();
+
+				// lock.lock();
+				// try {
+				// lc.increment();
+				// } finally {
+				// lock.unlock();
+				// }
 			}
 		});
 		t1.start();
@@ -53,7 +57,12 @@ public class TestLongCounterExperiments {
 		private long count = 0;
 
 		public void increment() {
-			count++;
+			lock.lock();
+			try {
+				count = count + 1;
+			} finally {
+				lock.unlock();
+			}
 		}
 
 		public long get() {
