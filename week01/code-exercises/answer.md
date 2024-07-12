@@ -3,10 +3,12 @@
 ## Mandatory
 
 1. Output: range from 10000000 to 20000000. No, I don't get expected result 20000000.
-2. Because it doesn't iterate so many times, so the possibility in race condition is much lower.
+2. Because it doesn't iterate so many times, so the possibility of race condition is much lower.
 3. No, because they are essentially the same with the following code.
 
 ```
 int temp = count;
 count = temp + 1;
 ```
+
+4. The codes showed in the question 3 are critical section for the thread. Because of lock, the race conditiong caused by interleavings will not happen. That means the critical sections exluded mutually, and excuted sequentially by the same thread.
