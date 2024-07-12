@@ -13,24 +13,29 @@ public class CounterThreads {
 
 			// Method 1:
 			// Create an instance of the thread
-			Turnstile turnstile = new Turnstile();
-
-			// Start the execution of the thread
-			turnstile.start();
-
-			// Wait until the thread finishes its execution
-			turnstile.join();
+			// Turnstile turnstile = new Turnstile();
 
 			// Method 2:
-			// Thread t = new Thread(new Runnable() {
+			// Thread turnstile = new Thread(new Runnable() {
 			// public void run() {
 			// for (int i = 0; i < PEOPLE; i++) {
 			// counter++;
 			// }
 			// }
 			// });
-			// t.start();
-			// t.join();
+
+			// Method 3:
+			Thread turnstile = new Thread(() -> {
+				for (int i = 0; i < PEOPLE; i++) {
+					counter++;
+				}
+			});
+
+			// Start the execution of the thread
+			turnstile.start();
+
+			// Wait until the thread finishes its execution
+			turnstile.join();
 
 			// Print the value of counter
 			System.out.println(counter + " people entered");
