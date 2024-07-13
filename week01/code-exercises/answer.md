@@ -32,4 +32,4 @@ count = temp + 1;  (2)
 
 - In the same thread, (1) -> (2)
 - Between the threads, e.g. t1 and t2 , t1(2) happens before t2(1)
-- Conclusion: because of lock, t1(1)->t1(2)->t2(1)->t2(2). that mean \[𝑡𝑥1,𝑡𝑥2\]
+- Conclusion: because of lock, t1(1)->t1(2)->t2(1)->t2(2). that mean \[tx(1),tx(2)\]\*
