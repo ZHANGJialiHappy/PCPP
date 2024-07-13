@@ -18,4 +18,4 @@ count = temp + 1;
 
 6. cd src/main/java/exercises01' -> javac LongCounter.java -> javap -c LongCounter.class
 
-- the output verify my explanation
+- the output verifies my explanation
