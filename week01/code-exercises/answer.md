@@ -19,3 +19,8 @@ count = temp + 1;
 6. cd src/main/java/exercises01' -> javac LongCounter.java -> javap -c LongCounter.class
 
 - the output verifies my explanation
+
+7.
+
+- The result should be between -10 million and 10 million.
+- The answer is the same with question 4. count-- is also the critical section.

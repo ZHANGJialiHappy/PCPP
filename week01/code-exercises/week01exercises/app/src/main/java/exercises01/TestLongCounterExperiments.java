@@ -10,7 +10,6 @@ public class TestLongCounterExperiments {
 
 	LongCounter lc = new LongCounter();
 	int counts = 10000000;
-	Lock lock = new ReentrantLock();
 
 	public TestLongCounterExperiments() {
 
@@ -25,6 +24,9 @@ public class TestLongCounterExperiments {
 				// lock.unlock();
 				// }
 			}
+			for (int i = 0; i < 10000000; i++) {
+				lc.decrement();
+			}
 		});
 		Thread t2 = new Thread(() -> {
 			for (int i = 0; i < counts; i++) {
@@ -37,6 +39,9 @@ public class TestLongCounterExperiments {
 				// lock.unlock();
 				// }
 			}
+			for (int i = 0; i < 10000000; i++) {
+				lc.decrement();
+			}
 		});
 		t1.start();
 		t2.start();
@@ -46,7 +51,7 @@ public class TestLongCounterExperiments {
 		} catch (InterruptedException exn) {
 			System.out.println("Some thread was interrupted");
 		}
-		System.out.println("Count is " + lc.get() + " and should be " + 2 * counts);
+		System.out.println("Count is " + lc.get());
 	}
 
 	public static void main(String[] args) {
@@ -55,11 +60,21 @@ public class TestLongCounterExperiments {
 
 	class LongCounter {
 		private long count = 0;
+		Lock lock = new ReentrantLock();
 
 		public void increment() {
 			lock.lock();
 			try {
 				count = count + 1;
+			} finally {
+				lock.unlock();
+			}
+		}
+
+		public void decrement() {
+			lock.lock();
+			try {
+				count--;
 			} finally {
 				lock.unlock();
 			}
