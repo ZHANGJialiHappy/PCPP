@@ -7,8 +7,8 @@
 3. No, because they are essentially the same with the following code.
 
 ```
-int temp = count;
-count = temp + 1;
+int temp = count;  (1)
+count = temp + 1;  (2)
 ```
 
 4. The codes showed in the question 3 are critical section for the thread. Because of lock, the race condition caused by interleavings will not happen. That means the critical sections exluded mutually, and excuted sequentially by the same thread.
@@ -23,4 +23,13 @@ count = temp + 1;
 7.
 
 - The result should be between -10 million and 10 million.
-- The answer is the same with question 4. count-- is also the critical section.
+- The reason is the same with question 4. count-- is also the critical section.
+
+8. ```
+   int temp = count;  (1)
+   count = temp + 1;  (2)
+   ```
+
+- In the same thread, (1) -> (2)
+- Between the threads, e.g. t1 and t2 , t1(2) happens before t2(1)
+- Conclusion: because of lock, t1(1)->t1(2)->t2(1)->t2(2). that mean \[𝑡𝑥1,𝑡𝑥2\]
