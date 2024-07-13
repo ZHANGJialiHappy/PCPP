@@ -24,9 +24,9 @@ public class TestLongCounterExperiments {
 				// lock.unlock();
 				// }
 			}
-			for (int i = 0; i < 10000000; i++) {
-				lc.decrement();
-			}
+			// for (int i = 0; i < 10000000; i++) {
+			// lc.decrement();
+			// }
 		});
 		Thread t2 = new Thread(() -> {
 			for (int i = 0; i < counts; i++) {
@@ -39,9 +39,9 @@ public class TestLongCounterExperiments {
 				// lock.unlock();
 				// }
 			}
-			for (int i = 0; i < 10000000; i++) {
-				lc.decrement();
-			}
+			// for (int i = 0; i < 10000000; i++) {
+			// lc.decrement();
+			// }
 		});
 		t1.start();
 		t2.start();
@@ -59,26 +59,26 @@ public class TestLongCounterExperiments {
 	}
 
 	class LongCounter {
-		private long count = 0;
+		private long count = 10000000;
 		Lock lock = new ReentrantLock();
 
 		public void increment() {
-			lock.lock();
-			try {
-				count = count + 1;
-			} finally {
-				lock.unlock();
-			}
+			// lock.lock();
+			// try {
+			count = count + 1;
+			// } finally {
+			// lock.unlock();
+			// }
 		}
 
-		public void decrement() {
-			lock.lock();
-			try {
-				count--;
-			} finally {
-				lock.unlock();
-			}
-		}
+		// public void decrement() {
+		// lock.lock();
+		// try {
+		// count--;
+		// } finally {
+		// lock.unlock();
+		// }
+		// }
 
 		public long get() {
 			return count;

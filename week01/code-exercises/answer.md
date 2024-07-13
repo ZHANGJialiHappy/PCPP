@@ -33,3 +33,5 @@ count = temp + 1;  (2)
 - In the same thread, (1) -> (2)
 - Between the threads, e.g. t1 and t2 , t1(2) happens before t2(1)
 - Conclusion: because of lock, t1(1)->t1(2)->t2(1)->t2(2). that mean \[tx(1),tx(2)\]\*
+
+9. assum we set count = a; the minimum value is between (10 million + a) to (20 million + a). Without lock, it can be \[t1(1), t2(1), t1(2), t2(2)\]\*
