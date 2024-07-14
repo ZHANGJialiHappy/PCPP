@@ -38,13 +38,17 @@ public class PrinterThreads {
 
         public void print() {
             lock.lock();
-            System.out.print("-");
             try {
-                Thread.sleep(50);
-            } catch (InterruptedException exn) {
+                System.out.print("-");
+                try {
+                    Thread.sleep(50);
+                } catch (InterruptedException exn) {
+                }
+                System.out.print("|");
+            } finally {
+                lock.unlock();
             }
-            System.out.print("|");
-            lock.unlock();
+
         }
     }
 }

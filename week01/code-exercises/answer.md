@@ -59,3 +59,9 @@ count = temp + 1;  (2)
 - In the same thread, it must be (1) -> (2)
 - Between the threads or above block of codes, after finishing above the above codes, it can be unlocked. That means, out of the block, t(2) always happens before t(1)
 - Conclusion: because of lock, ...->\[t1(1)->t1(2)\]_->\[t2(1)->t2(2)\]_->...
+
+# Exercise 1.2
+
+## Mandatory
+
+## Challenging
