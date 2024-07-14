@@ -67,4 +67,8 @@ count = temp + 1;  (2)
 1. look at CounterThreads2Covid.java
 2. in both turnstile1 and turnstile2 will check if count is equal to 15000, if yes, it will break the loop. That mean as long as long thread reach 15000, it will break, then other thread also checks, then break, so the answer must be 15000.
 
+# Exercise 1.4
+
+## Mandatory
+
 ## Challenging
