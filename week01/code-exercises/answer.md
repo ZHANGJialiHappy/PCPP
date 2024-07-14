@@ -30,8 +30,31 @@ count = temp + 1;  (2)
    count = temp + 1;  (2)
    ```
 
-- In the same thread, (1) -> (2)
-- Between the threads, e.g. t1 and t2 , t1(2) happens before t2(1)
-- Conclusion: because of lock, t1(1)->t1(2)->t2(1)->t2(2). that mean \[tx(1),tx(2)\]\*
+- In the same thread, it must be (1) -> (2)
+- Between the threads or above block of codes, after finishing above the above codes, it can be unlocked. That means t(2) always happens before t(1)
+- Conclusion: because of lock, ...->\[t1(1)->t1(2)\]_->\[t2(1)->t2(2)\]_->...
 
-9. assum we set count = a; the minimum value is between (10 million + a) to (20 million + a). Without lock, it can be \[t1(1), t2(1), t1(2), t2(2)\]\*
+9. assum we set count = a; the minimum value is between (10 million + a) and (20 million + a). Without lock, it can be \[t1(1), t2(1), t1(2), t2(2)\]\*
+
+# Exercise 1.2
+
+## Mandatory
+
+1. see main/java/exercises01/PrinterThreads
+2. ```
+      System.out.print("-"); (1)
+      try {
+          Thread.sleep(50);
+      } catch (InterruptedException exn) {
+      }
+      System.out.print("|"); (2)
+   ```
+   Without lock, the above code for t1 and t2 will interleave. For example, it can be t1(1), t2(1), t1(2), t2(2).
+3. When the above codes are locked, the locked codes in thread must finished, then can be unlocked. It avoids interleaving problem.
+
+## Challenging
+
+4. - In the same thread, it must be (1) -> (2)
+
+- Between the threads or above block of codes, after finishing above the above codes, it can be unlocked. That means, out of the block, t(2) always happens before t(1)
+- Conclusion: because of lock, ...->\[t1(1)->t1(2)\]_->\[t2(1)->t2(2)\]_->...
