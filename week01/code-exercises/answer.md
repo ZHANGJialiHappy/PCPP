@@ -60,8 +60,11 @@ count = temp + 1;  (2)
 - Between the threads or above block of codes, after finishing above the above codes, it can be unlocked. That means, out of the block, t(2) always happens before t(1)
 - Conclusion: because of lock, ...->\[t1(1)->t1(2)\]_->\[t2(1)->t2(2)\]_->...
 
-# Exercise 1.2
+# Exercise 1.3
 
 ## Mandatory
+
+1. look at CounterThreads2Covid.java
+2. in both turnstile1 and turnstile2 will check if count is equal to 15000, if yes, it will break the loop. That mean as long as long thread reach 15000, it will break, then other thread also checks, then break, so the answer must be 15000.
 
 ## Challenging

@@ -7,9 +7,9 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class CounterThreads2Covid {
 
-	long counter = 0;
-	final long PEOPLE = 10_000;
-	final long MAX_PEOPLE_COVID = 15_000;
+	volatile long counter = 0;
+	final long PEOPLE = 10000;
+	final long MAX_PEOPLE_COVID = 15000;
 	Lock lock = new ReentrantLock();
 
 	public CounterThreads2Covid() {
@@ -38,6 +38,8 @@ public class CounterThreads2Covid {
 			for (int i = 0; i < PEOPLE; i++) {
 				lock.lock();
 				try {
+					if (counter == MAX_PEOPLE_COVID)
+						break;
 					counter++;
 				} finally {
 					lock.unlock();
