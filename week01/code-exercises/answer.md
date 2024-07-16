@@ -1,3 +1,9 @@
+# Running (for example)
+
+1. cd root
+2. $ gradle -PmainClass=exercises01.TestLongCounterExperiments run
+3. $ gradle -PmainClass=exercises01.CounterThreads2Covid run
+
 # Exercise 1.1
 
 ## Mandatory
