@@ -4,6 +4,7 @@
 # Ignore temporal linux files
 *~
 
+# ignore build
 **/build/
 !src/**/build/
 
