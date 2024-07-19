@@ -8,4 +8,4 @@
 
 ## Mandatory
 
-1.
+1. look at code in FairReadWriteMonitor.Java
