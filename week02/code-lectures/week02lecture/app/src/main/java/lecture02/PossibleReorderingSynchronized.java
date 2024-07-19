@@ -36,7 +36,6 @@ public class PossibleReorderingSynchronized {
 				System.out.println("(" + x + "," + y + ")");
 
 			// System.out.println("(" + a + "," + b + ")");
-
 			// System.out.println("(" + x + "," + y + ")");
 		}
 	}

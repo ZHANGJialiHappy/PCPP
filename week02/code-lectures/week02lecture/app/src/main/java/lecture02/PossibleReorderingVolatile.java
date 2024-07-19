@@ -3,32 +3,39 @@
 package lecture02;
 
 public class PossibleReorderingVolatile {
-    volatile int x=0, y=0;
-    volatile int a=0, b=0;
+	volatile int x = 0, y = 0;
+	volatile int a = 0, b = 0;
 
-    public PossibleReorderingVolatile() throws InterruptedException {
-		for (int i = 0; i < 1_000_000; i++) {
-			x=0;y=0;
-			a=0;b=0;
+	public PossibleReorderingVolatile() throws InterruptedException {
+		for (int i = 0; i < 100; i++) {
+			x = 0;
+			y = 0;
+			a = 0;
+			b = 0;
 
 			// Threads definition
 			Thread one = new Thread(() -> {
-					a=1;
-					x=b;
+				a = 1;
+				x = b;
 			});
 			Thread other = new Thread(() -> {
-					b=1;
-					y=a;
+				b = 1;
+				y = a;
 			});
-			one.start();other.start();
-			one.join();other.join();
+			one.start();
+			other.start();
+			one.join();
+			other.join();
 			// This condition never holds
-			if (x==0 && y==0)
-				System.out.println("("+x+","+y+")");
-		}
-    }
+			if (x == 0 && y == 0)
+				System.out.println("(" + x + "," + y + ")");
 
-    public static void main(String[] args) throws InterruptedException {
+			// System.out.println("(" + a + "," + b + ")");
+			// System.out.println("(" + x + "," + y + ")");
+		}
+	}
+
+	public static void main(String[] args) throws InterruptedException {
 		new PossibleReorderingVolatile();
-    }
+	}
 }
