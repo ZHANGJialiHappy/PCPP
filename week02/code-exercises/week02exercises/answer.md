@@ -52,6 +52,6 @@ so we writersWaiting++ before a writer acquire a lock, and check if writersWaiti
 
 ## Challenging
 
-3. yes, I've implemented above.
+3. I use ReentrantReadWriteLock(look at FairReadWriteMonitor2). I fail to use ReentrantLock or intrinsic java locks (synchronized) to avoid starvation. FairReadWriteMonitor can cause starvation of reader. If I use readersWaiting == 0 to avoid writer to cut in line, it will cause deadlock.
 
 # Exercise 2.2

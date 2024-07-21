@@ -40,6 +40,7 @@ public class FairReadWriteMonitor {
 			}
 			writersWaiting--;
 			writer = true;
+
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
