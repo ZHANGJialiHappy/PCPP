@@ -1,10 +1,10 @@
 # Running (for example)
 
 1. cd root
-2. $ gradle -PmainClass=exercises01.TestLocking0 run
-3. $ gradle -PmainClass=exercises01.TestMutableInteger run
+2. $ gradle -PmainClass=exercises02.TestLocking0 run
+3. $ gradle -PmainClass=exercises02.TestMutableInteger run
 
-# Exercise 1.1
+# Exercise 2.1
 
 ## Mandatory
 
@@ -48,4 +48,10 @@ public void writeLock() {
 
 ```
 
-so we writersWaiting++ before a writer acquire a lock, and check if writersWaiting ==0 to avoid reader cut inline. For example, W1, W2, R3 are inline, exactly because writersWaiting=1, W2,R3 acquire lock eventually.
+so we writersWaiting++ before a writer acquire a lock, and check if writersWaiting == 0 to avoid reader cut inline. For example, W1, W2, R3 are inline, after unlocking w1, exactly because writersWaiting++ in W2, writersWaiting== 1, so W2,R3 acquire lock eventually.
+
+## Challenging
+
+3. yes, I've implemented above.
+
+# Exercise 2.2
