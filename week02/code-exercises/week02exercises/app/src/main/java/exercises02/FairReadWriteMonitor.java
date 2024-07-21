@@ -6,6 +6,7 @@ public class FairReadWriteMonitor {
 	private int readsAcquires = 0;
 	private int readsReleases = 0;
 	private boolean writer = false;
+	private int writersWaiting = 0;
 
 	//////////////////////////
 	// Read lock operations //
@@ -13,7 +14,7 @@ public class FairReadWriteMonitor {
 
 	public synchronized void readLock() {
 		try {
-			while (writer)
+			while (writer || writersWaiting > 0)
 				wait();
 			readsAcquires++;
 		} catch (InterruptedException e) {
@@ -33,11 +34,12 @@ public class FairReadWriteMonitor {
 
 	public synchronized void writeLock() {
 		try {
-			while (writer)
+			writersWaiting++;
+			while (writer || readsAcquires != readsReleases) {
 				wait();
+			}
+			writersWaiting--;
 			writer = true;
-			while (readsAcquires != readsReleases)
-				wait();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
