@@ -59,3 +59,14 @@ so we writersWaiting++ before a writer acquire a lock, and check if writersWaiti
 ## Mandatory
 
 1. Yes, it loops forever, because main thread and thread t may run in different cpus, so thread t can't view mi's value is setted to 42 in main thread.
+2. With Java Intrinsic Locks (synchronized), it establishs a happen-before relation enforces visibility
+
+- In the program below, it holds
+
+```
+while(mi.get==0) -> mi.set(42)
+or
+mi.set(42) -> while(mi.get==0)
+```
+
+- the CPU is notallowed to keep the value of mi in the register of the CPU or cache and must flush it to main memory.
