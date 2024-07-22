@@ -24,7 +24,6 @@ public class ReadersWriters {
                 System.out.println(" Writer " + Thread.currentThread().getId() + " stopped writing");
                 m.writeUnlock();
             }).start();
-
             // start a reader
             new Thread(() -> {
                 m.readLock();
