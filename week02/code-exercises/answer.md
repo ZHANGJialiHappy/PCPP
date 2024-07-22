@@ -55,3 +55,7 @@ so we writersWaiting++ before a writer acquire a lock, and check if writersWaiti
 3. I use ReentrantReadWriteLock(look at FairReadWriteMonitor2). I fail to use ReentrantLock or intrinsic java locks (synchronized) to avoid starvation. FairReadWriteMonitor can cause starvation of reader. If I use readersWaiting == 0 to avoid writer to cut in line, it will cause deadlock.
 
 # Exercise 2.2
+
+## Mandatory
+
+1. Yes, it loops forever, because main thread and thread t may run in different cpus, so thread t can't view mi's value is setted to 42 in main thread.
