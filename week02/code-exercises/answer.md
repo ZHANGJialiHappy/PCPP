@@ -105,3 +105,9 @@ try {
 so while(mi.get==0)b {}, run 100 ms, than mi.set(42) -> while(mi.get==0)
 
 5. already use happens before answered.
+
+# Exercise 2.3
+
+## Mandatory
+
+1. Yes, there is race condition.
