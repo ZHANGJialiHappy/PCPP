@@ -83,3 +83,23 @@ main(mi.set(42)) ↛ t (while(mi.get==0))
 ```
 
 - Consequently, the CPU is allowed to keep the value of running in the register of the CPU or cache and not flush it to main memory
+
+4. Volatile variables in terms of reads/writes and happens-before
+
+- A writeto a volatile variable happens before any subsequentreadto the volatile variable:
+
+```
+mi.set(42) -> while(mi.get==0)
+```
+
+since there is
+
+```
+try {
+		Thread.sleep(100);
+	} catch (InterruptedException e) {
+		e.printStackTrace();
+	}
+```
+
+so while(mi.get==0)b {}, run 100 ms, than mi.set(42) -> while(mi.get==0)
