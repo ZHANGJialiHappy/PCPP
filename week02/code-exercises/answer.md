@@ -111,3 +111,11 @@ so while(mi.get==0)b {}, run 100 ms, than mi.set(42) -> while(mi.get==0)
 ## Mandatory
 
 1. Yes, there is race condition.
+2. Instance Methods
+
+- When you synchronize an instance method (public synchronized void addInstance(double x)), it locks on the instance of the object (this).
+- Each object instance has int own intrinsic lock. Thus, different instances of the same class do not share the same lock.
+  Static Methods
+- When you synchronize a static method (public static synchronized void addStatic(double x)), it locks on the Class object representing the class (Mystery.class).
+- All static synchronized methods of the class share the same lock, regardless of how many instances of the class exist.
+  Conclusion: Even though both methods are synchronized, they do not synchronize on the same lock, but both update sum.
