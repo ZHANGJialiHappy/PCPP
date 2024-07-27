@@ -125,3 +125,6 @@ so while(mi.get==0)b {}, run 100 ms, than mi.set(42) -> while(mi.get==0)
    <br />
    private static final Object lock = new Object();
    A single static lock object is used for synchronization, ensuring that all accesses to the sum field are thread-safe.
+4. Yes, there is race condition.
+   <br/>
+   Without synchronization, there can be a situation where one thread reads sum while another thread is updating it. This can result in inconsistent or stale values being read.
