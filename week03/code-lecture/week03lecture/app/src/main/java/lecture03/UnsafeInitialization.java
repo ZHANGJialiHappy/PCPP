@@ -5,44 +5,43 @@ package lecture03;
 import java.util.Objects;
 
 class TestUnsafeInitialization {
-    public TestUnsafeInitialization() {
-		int N = 10_000_000;
+	public TestUnsafeInitialization() {
+		int N = 10_000;
 		for (int i = 0; i < N; i++) {
-	    
-			UnsafeInitialization u = new UnsafeInitialization();
-	    
-			new Thread(() -> {
-					if (u.readX()!=42)
-						System.out.println("x is not equal 42");
-			}).start();
-	    
-			new Thread(() -> {
-					if (Objects.isNull(u.readO()))
-						System.out.println("o is null");
-			}).start();		
-		}
-    }
 
-    public static void main(String[] args) {
+			UnsafeInitialization u = new UnsafeInitialization();
+
+			new Thread(() -> {
+				if (u.readX() != 42)
+					System.out.println("x is not equal 42");
+			}).start();
+
+			new Thread(() -> {
+				if (Objects.isNull(u.readO()))
+					System.out.println("o is null");
+			}).start();
+		}
+	}
+
+	public static void main(String[] args) {
 		new TestUnsafeInitialization();
-    }
+	}
 }
 
-
 class UnsafeInitialization {
-    private int x;
-    private Object o;
+	private int x;
+	private Object o;
 
-    public UnsafeInitialization() {
+	public UnsafeInitialization() {
 		this.x = 42;
 		this.o = new Object();
-    }
+	}
 
-    public int readX() {
+	public int readX() {
 		return this.x;
-    }
+	}
 
-    public Object readO() {
+	public Object readO() {
 		return this.o;
-    }
+	}
 }
