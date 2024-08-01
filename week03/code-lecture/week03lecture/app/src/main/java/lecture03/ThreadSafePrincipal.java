@@ -93,4 +93,17 @@ final class ImmutablePoint {
     public int getY() {
         return y;
     }
-}// • If class statemust be mutable, ensure mutual exclusion
+}
+
+// • If class statemust be mutable, ensure mutual exclusion
+class SynchronizedCounter {
+    private int count = 0;
+
+    public synchronized void increment() {
+        count++;
+    }
+
+    public synchronized int getCount() {
+        return count;
+    }
+}
