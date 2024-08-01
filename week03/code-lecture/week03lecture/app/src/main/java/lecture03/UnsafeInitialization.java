@@ -29,6 +29,8 @@ class TestUnsafeInitialization {
 }
 
 class UnsafeInitialization {
+	// private volatile int x;
+	// private final Object o;
 	private int x;
 	private Object o;
 
