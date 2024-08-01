@@ -24,8 +24,9 @@ class TestUnsafeInitialization {
 	}
 
 	public static void main(String[] args) {
-		new TestUnsafeInitialization();
+		// new TestUnsafeInitialization();
 	}
+
 }
 
 class UnsafeInitialization {
