@@ -42,6 +42,55 @@ class UnsafeList {
         return list; // Mutable state escapes
     }
 }
+
 // • Ensure safe publication
+class UnsafePublication {
+    private Holder holder;
+
+    public void initialize() {
+        holder = new Holder(42); // Holder may not be safely published
+        new Thread(() -> {
+            if (holder.getValue() == 0) {
+                System.out.println("can't view value");
+            }
+        }).start();
+    }
+
+    public Holder getHolder() {
+        return holder;
+    }
+}
+
+class Holder {
+    private int value;
+
+    public Holder(int value) {
+        this.value = value;
+    }
+
+    public int getValue() {
+        return value;
+    }
+}
+
 // • Whenever possible define class state as immutable
-// • If class statemust be mutable, ensure mutual exclusion
+// The class is declared final, which means no other class can extend
+// ImmutablePoint. This ensures that the design and guarantees of immutability
+// are not altered by subclassing.
+final class ImmutablePoint {
+    private final int x;
+    private final int y;
+
+    public ImmutablePoint(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+}// • If class statemust be mutable, ensure mutual exclusion
