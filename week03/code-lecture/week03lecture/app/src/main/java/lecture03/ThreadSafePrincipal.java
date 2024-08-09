@@ -95,7 +95,7 @@ final class ImmutablePoint {
     }
 }
 
-// • If class statemust be mutable, ensure mutual exclusion
+// • If class state must be mutable, ensure mutual exclusion
 class SynchronizedCounter {
     private int count = 0;
 
