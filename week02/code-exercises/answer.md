@@ -59,19 +59,6 @@ so we writersWaiting++ before a writer acquire a lock, and check if writersWaiti
 ## Mandatory
 
 1. Yes, it loops forever, because main thread and t thread may run in different cpus, so t thread can't view mi's value is setted to 42 in main thread.
-2. With Java Intrinsic Locks (synchronized), it establishs a happen-before relation enforces visibility
-
-- In the program below, it holds
-
-```
-while(mi.get==0) -> mi.set(42)
-or
-mi.set(42) -> while(mi.get==0)
-```
-
-- the CPU is not allowed to keep the value of mi in the register of the CPU or cache and must flush it to main memory.
-
-3. No, if main thread and t thread run in different CPU and the data is not flushed into main memory immediately:
 
 - lack of happens-before relation between operations
 - In the program below, it holds:
@@ -89,6 +76,20 @@ t thread ∣∣ main
 ```
 
 - Consequently, the CPU is allowed to keep the value of running in the register of the CPU or cache and not flush it to main memory
+
+2. With Java Intrinsic Locks (synchronized), it establishs a happen-before relation enforces visibility
+
+- In the program below, it holds
+
+```
+while(mi.get==0) -> mi.set(42)
+or
+mi.set(42) -> while(mi.get==0)
+```
+
+- the CPU is not allowed to keep the value of mi in the register of the CPU or cache and must flush it to main memory.
+
+3. No, if main thread and t thread run in different CPU, and Without synchronized on get(), thread t is not guaranteed to terminate because it may not see the updated value of 42 in the value field due to visibility issues. Therefore, making get() synchronized is crucial for ensuring that thread t terminates as expected.
 
 4. Volatile variables in terms of reads/writes and happens-before
 
@@ -112,14 +113,68 @@ so while(mi.get==0) {}, run 500 ms, than mi.set(42) -> while(mi.get==0)
 
 5. Operations and Expected Happens-Before Relationships:
 
-[while(mi.get==0)]\* -> mi.set(42) -> while(mi.get==0)<br/>
+```
+[while(mi.get==0)]\* -> mi.set(42) -> while(mi.get==0)
+```
+
 Other happens-before pairs:<br/>
-t.start() in main -> first action in thread t <br/>
-last action in thread t -> t.join() in main <br/>
-Reason that t thread does not terminate, see answer 2.2.3. <br/>
+
+```
+t.start() in main -> first action in thread t
+```
+
+```
+last action in thread t -> t.join() in main
+```
+
+Reason that t thread does not terminate, see answer 2.2.1. <br/>
 To conclution: if it lacks required happens-before pair, which is mi.set(42) -> while(mi.get==0), it can't terminate.
 
-6. see answer 2.2.3
+6. list happens before pairs:
+
+```
+t.start() -> first action in thread t
+```
+
+```
+mi.set(42) -> subsequent actions in main after mi.set(42)
+```
+
+```
+last action in thread t -> t.join() in main
+```
+
+may be
+
+```
+mi.set(42) ↛ while(mi.get==0)
+```
+
+Lack of the required Happens-Before pair:
+
+```
+mi.set(42) -> while(mi.get==0)
+```
+
+7. list happens before pairs:
+
+```
+t.start() -> first action in thread t
+```
+
+```
+mi.set(42) -> any subsequent reads of value in thread t
+```
+
+```
+last action in thread t -> t.join() in main
+```
+
+Has the required Happens-Before pair:
+
+```
+mi.set(42) -> any subsequent reads of value in thread t
+```
 
 # Exercise 2.3
 
