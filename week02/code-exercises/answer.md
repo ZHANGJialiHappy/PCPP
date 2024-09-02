@@ -82,11 +82,17 @@ or
 main(mi.set(42)) ↛ t (while(mi.get==0))
 ```
 
+because
+
+```
+t thread ∣∣ main
+```
+
 - Consequently, the CPU is allowed to keep the value of running in the register of the CPU or cache and not flush it to main memory
 
 4. Volatile variables in terms of reads/writes and happens-before
 
-- A writeto a volatile variable happens before any subsequentreadto the volatile variable:
+- A write to a volatile variable happens before any subsequent read to the volatile variable:
 
 ```
 mi.set(42) -> while(mi.get==0)
@@ -96,15 +102,24 @@ since there is
 
 ```
 try {
-		Thread.sleep(100);
+		Thread.sleep(500);
 	} catch (InterruptedException e) {
 		e.printStackTrace();
 	}
 ```
 
-so while(mi.get==0)b {}, run 100 ms, than mi.set(42) -> while(mi.get==0)
+so while(mi.get==0) {}, run 500 ms, than mi.set(42) -> while(mi.get==0)
 
-5. already use happens before answered.
+5. Operations and Expected Happens-Before Relationships:
+
+[while(mi.get==0)]\* -> mi.set(42) -> while(mi.get==0)<br/>
+Other happens-before pairs:<br/>
+t.start() in main -> first action in thread t <br/>
+last action in thread t -> t.join() in main <br/>
+Reason that t thread does not terminate, see answer 2.2.3. <br/>
+To conclution: if it lacks required happens-before pair, which is mi.set(42) -> while(mi.get==0), it can't terminate.
+
+6. see answer 2.2.3
 
 # Exercise 2.3
 
