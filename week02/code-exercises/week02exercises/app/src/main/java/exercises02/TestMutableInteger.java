@@ -10,21 +10,17 @@ public class TestMutableInteger {
 		final MutableInteger mi = new MutableInteger();
 		Thread t = new Thread(() -> {
 			while (mi.get() == 0) {
-				synchronized (o) {
-					System.out.println("do nothing");
-				}
+				System.out.println("do nothing");
 			} // Loop while zero
 			System.out.println("I completed, mi = " + mi.get());
 		});
 		t.start();
 		try {
-			Thread.sleep(100);
+			Thread.sleep(500);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		synchronized (o) {
-			mi.set(42);
-		}
+		mi.set(42);
 		System.out.println("mi set to 42, waiting for thread ...");
 		try {
 			t.join();
@@ -39,11 +35,11 @@ class MutableInteger {
 	// WARNING: Not ready for usage by concurrent programs
 	private int value = 0;
 
-	public void set(int value) {
+	public synchronized void set(int value) {
 		this.value = value;
 	}
 
-	public int get() {
+	public synchronized int get() {
 		return value;
 	}
 }

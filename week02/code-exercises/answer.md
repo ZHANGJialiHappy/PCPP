@@ -9,7 +9,7 @@
 ## Mandatory
 
 1. look at code in FairReadWriteMonitor.Java
-2. to check if writersWaiting==0 ensures readers can't cut inline. For example, w1 w2 r1 are coming in the line. After unlock w1, if there is no writersWaiting r1 can more possibility to cut in line and acquire lock before w2 (look at the original code following).
+2. to check if writersWaiting==0 ensures readers can't cut inline. For example, w1 w2 r1 are coming in the line. After unlock w1, if there is no writersWaiting, r1 can more possibility to cut in line and acquire lock before w2 (look at the original code following).
 
 ```
     public void readLock() {
@@ -69,7 +69,7 @@ or
 mi.set(42) -> while(mi.get==0)
 ```
 
-- the CPU is notallowed to keep the value of mi in the register of the CPU or cache and must flush it to main memory.
+- the CPU is not allowed to keep the value of mi in the register of the CPU or cache and must flush it to main memory.
 
 3. No, if main thread and t thread run in different CPU and the data is not flushed into main memory immediately:
 
