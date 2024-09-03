@@ -191,7 +191,7 @@ mi.set(42) -> any subsequent reads of value in thread t
   The lock used to synchronize the method is the class-level lock.
 - All static synchronized methods of the class share the same lock, regardless of how many instances of the class exist.
   <br />
-  Conclusion: Even though both methods are synchronized, they do not synchronize on the same lock, but both update sum.
+  **Conclusion**: Even though both methods are synchronized, they do not synchronize on the same lock, but both update sum.
 
 3. Static Lock Object:
    <br />
