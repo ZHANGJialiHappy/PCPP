@@ -183,12 +183,14 @@ mi.set(42) -> any subsequent reads of value in thread t
 1. Yes, there is race condition.
 2. Instance Methods
 
-- When you synchronize an instance method (public synchronized void addInstance(double x)), it locks on the instance of the object (this).
-- Each object instance has int own intrinsic lock. Thus, different instances of the same class do not share the same lock.<br />
+- the lock used to synchronize a instance method is the instance lock.
+- when a synchronized instance method on an object is called in a thread, instance lock is acquired, and other synchronized instance method on the object should wait for the first thread until it releases the lock.<br />
   <br />
   Static Methods
 - When you synchronize a static method (public static synchronized void addStatic(double x)), it locks on the Class object representing the class (Mystery.class).
+  The lock used to synchronize the method is the class-level lock.
 - All static synchronized methods of the class share the same lock, regardless of how many instances of the class exist.
+  <br />
   Conclusion: Even though both methods are synchronized, they do not synchronize on the same lock, but both update sum.
 
 3. Static Lock Object:
