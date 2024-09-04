@@ -10,7 +10,7 @@ public class TestMutableInteger {
 		final MutableInteger mi = new MutableInteger();
 		Thread t = new Thread(() -> {
 			while (mi.get() == 0) {
-				System.out.println("do nothing");
+				// System.out.println("do nothing");
 			} // Loop while zero
 			System.out.println("I completed, mi = " + mi.get());
 		});
@@ -33,7 +33,7 @@ public class TestMutableInteger {
 
 class MutableInteger {
 	// WARNING: Not ready for usage by concurrent programs
-	private volatile int value = 0;
+	private int value = 0;
 
 	public void set(int value) {
 		this.value = value;
