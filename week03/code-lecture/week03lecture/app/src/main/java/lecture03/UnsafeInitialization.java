@@ -24,14 +24,14 @@ class TestUnsafeInitialization {
 	}
 
 	public static void main(String[] args) {
-		// new TestUnsafeInitialization();
+		new TestUnsafeInitialization();
 	}
 
 }
 
 class UnsafeInitialization {
 	// private volatile int x;
-	// private final Object o;
+	// private volatile Object o;
 	private int x;
 	private Object o;
 
