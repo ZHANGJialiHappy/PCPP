@@ -36,10 +36,10 @@ public class PossibleReordering {
 			one.join();
 			other.join();
 			// `main` checks whether there has been a reordering
-			if (x == 0 && y == 0)
-				System.out.println("(" + x + "," + y + ")");
-			// System.out.println("(" + a + "," + b + ")");
+			// if (x == 0 && y == 0)
 			// System.out.println("(" + x + "," + y + ")");
+			System.out.println("(a=" + a + ", b=" + b + ")");
+			System.out.println("(x=" + x + ", y=" + y + ")");
 		}
 	}
 

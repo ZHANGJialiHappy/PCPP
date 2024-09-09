@@ -3,7 +3,7 @@
 package lecture02;
 
 public class PossibleReorderingVolatile {
-	volatile int x = 0, y = 0;
+	int x = 0, y = 0;
 	volatile int a = 0, b = 0;
 
 	public PossibleReorderingVolatile() throws InterruptedException {
@@ -27,11 +27,11 @@ public class PossibleReorderingVolatile {
 			one.join();
 			other.join();
 			// This condition never holds
-			if (x == 0 && y == 0)
-				System.out.println("(" + x + "," + y + ")");
-
-			// System.out.println("(" + a + "," + b + ")");
+			// if (x == 0 && y == 0)
 			// System.out.println("(" + x + "," + y + ")");
+
+			// System.out.println("(a=" + a + ", b=" + b + ")");
+			System.out.println("(x=" + x + ", y=" + y + ")");
 		}
 	}
 

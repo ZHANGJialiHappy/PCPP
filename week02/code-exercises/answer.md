@@ -200,4 +200,4 @@ mi.set(42) -> any subsequent reads of value in thread t
    A single static lock object is used for synchronization, ensuring that all accesses to the sum field are thread-safe.
 4. Yes, there is race condition.
    <br/>
-   Without synchronization, there can be a situation where one thread reads sum while another thread is updating it. This can result in inconsistent or stale values being read.
+   Without synchronization, there can be a situation where one thread reads sum while another thread is updating it. This can result in inconsistent or stale values being read. But in this case, 2 thread join first, then sum(), so the 2 threads finished execution first, then get the value.

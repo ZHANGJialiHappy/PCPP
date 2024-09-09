@@ -3,7 +3,7 @@ package lecture03;
 import java.util.concurrent.Semaphore;
 
 public class SemaphoreAsLock {
-    private final Semaphore semaphore = new Semaphore(1);
+    private final Semaphore semaphore = new Semaphore(5);
 
     public void criticalSection() {
         try {
